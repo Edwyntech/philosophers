@@ -16,5 +16,7 @@ public class DinnerTable {
 
     public void seat(Philosopher philosopher) {
         philosopher.seatAt(this);
+        addChopstick();
+        addChopstick();
     }
 }

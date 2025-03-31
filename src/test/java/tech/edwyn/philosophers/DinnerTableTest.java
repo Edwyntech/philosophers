@@ -1,6 +1,5 @@
 package tech.edwyn.philosophers;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +27,6 @@ class DinnerTableTest {
     void shouldWelcomeOnePhilosopher() {
         dinnerTable.seat(platon);
         assertThat(platon.isSeatedAt()).isEqualTo(dinnerTable);
+        assertThat(dinnerTable.chopsticks()).hasSize(2);
     }
 }
