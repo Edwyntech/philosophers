@@ -3,7 +3,6 @@ package tech.edwyn.philosophers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class DinnerTable {
     private final List<Chopstick> chopsticks = new ArrayList<>();
@@ -19,8 +18,11 @@ public class DinnerTable {
 
     public void seat(Philosopher... philosophers) {
         this.guests.addAll(Arrays.asList(philosophers));
-        addChopstick();
-        addChopstick();
+        if (!this.guests.isEmpty()) {
+            while (this.chopsticks.size() < 2 || this.chopsticks.size() < this.guests.size()) {
+                addChopstick();
+            }
+        }
     }
 
     public List<Philosopher> guests() {
