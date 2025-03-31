@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 public class Dinner {
     private final List<Philosopher> philosophers = new ArrayList<>();
-    private DinnerTable dinnerTable = new DinnerTable();
+    private final DinnerTable dinnerTable = new DinnerTable();
 
     public List<Philosopher> philosophers() {
         return philosophers;
@@ -18,5 +18,9 @@ public class Dinner {
 
     public DinnerTable table() {
         return dinnerTable;
+    }
+
+    public void start() {
+        this.dinnerTable.seat(this.philosophers.toArray(new Philosopher[0]));
     }
 }

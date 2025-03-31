@@ -31,5 +31,16 @@ class DinnerTest {
         assertThat(dinner.table()).isNotNull();
     }
 
+    @Test
+    void shouldHaveEmptyTableBeforeStart() {
+        assertThat(dinner.table().guests()).isEmpty();
+    }
 
+    @Test
+    void shouldHaveGuestsAndChopsticksWhenStarts() {
+        dinner.add("Platon", "Aristote", "Hegel");
+        dinner.start();
+        assertThat(dinner.table().guests()).hasSize(3);
+        assertThat(dinner.table().chopsticks()).hasSize(3);
+    }
 }
