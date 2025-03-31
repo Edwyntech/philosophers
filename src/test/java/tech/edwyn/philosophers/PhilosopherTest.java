@@ -27,4 +27,11 @@ class PhilosopherTest {
         assertThat(philosopher.hasEaten()).isTrue();
         assertThat(philosopher.hasThought()).isTrue();
     }
+
+    @Test
+    void shouldSeatAtTable() {
+        DinnerTable dinnerTable = new DinnerTable();
+        philosopher.seatAt(dinnerTable);
+        assertThat(philosopher.isSeatedAt()).isEqualTo(dinnerTable);
+    }
 }

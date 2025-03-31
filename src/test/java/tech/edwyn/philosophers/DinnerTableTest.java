@@ -26,7 +26,14 @@ class DinnerTableTest {
     @Test
     void shouldWelcomeOnePhilosopher() {
         dinnerTable.seat(platon);
-        assertThat(platon.isSeatedAt()).isEqualTo(dinnerTable);
         assertThat(dinnerTable.chopsticks()).hasSize(2);
+        assertThat(dinnerTable.guests()).hasSize(1);
+    }
+
+    @Test
+    void shouldWelcomeTwoPhilosophers() {
+        dinnerTable.seat(platon, new Philosopher("Aristote"));
+        assertThat(dinnerTable.chopsticks()).hasSize(2);
+        assertThat(dinnerTable.guests()).hasSize(2);
     }
 }
