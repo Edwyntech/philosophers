@@ -1,0 +1,30 @@
+package tech.edwyn.philosophers;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
+class PhilosopherTest {
+    private Philosopher philosopher;
+
+    @BeforeEach
+    void initializeTest() {
+        philosopher = new Philosopher("Platon");
+    }
+
+    @Test
+    void shouldNotHaveDinnerWhenInitialized() {
+        assertThat(philosopher.hasEaten()).isFalse();
+        assertThat(philosopher.hasThought()).isFalse();
+    }
+
+    @Test
+    void shouldHaveDinner() {
+        philosopher.haveDinner();
+        assertThat(philosopher.hasEaten()).isTrue();
+        assertThat(philosopher.hasThought()).isTrue();
+    }
+}
