@@ -12,6 +12,9 @@ public class DinnerTable {
 
     public void addChopstick() {
         this.chopsticks.add(new Chopstick());
+    }
 
+    public void seat(Philosopher philosopher) {
+        philosopher.seatAt(this);
     }
 }
