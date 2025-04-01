@@ -39,4 +39,11 @@ public class Philosopher {
     public Chopstick rightChopstick() {
         return this.rightChopstick;
     }
+
+    public void eat() throws InterruptedException {
+        this.leftChopstick.take();
+        this.rightChopstick.take();
+        System.out.printf("[%s]: I am eating.", this.name);
+        Thread.sleep(50);
+    }
 }
