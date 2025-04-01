@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PhilosopherTest {
@@ -22,7 +23,15 @@ class PhilosopherTest {
     }
 
     @Test
-    void shouldHaveDinner() {
+    void shouldNotHaveDinnerWithoutChopsticks() {
+        assertThatThrownBy(() -> philosopher.haveDinner()).isInstanceOf(IllegalStateException.class).hasMessage(
+                "Cannot eat without chopsticks.");
+    }
+
+    @Test
+    void shouldHaveDinner() throws InterruptedException {
+        philosopher.assignLeftChopstick(new Chopstick());
+        philosopher.assignRightChopstick(new Chopstick());
         philosopher.haveDinner();
         assertThat(philosopher.hasEaten()).isTrue();
         assertThat(philosopher.hasThought()).isTrue();

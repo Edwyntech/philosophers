@@ -11,8 +11,11 @@ public class Philosopher {
         this.name = name;
     }
 
-    public void haveDinner() {
-        this.hasEaten = true;
+    public void haveDinner() throws InterruptedException {
+        if (this.leftChopstick == null || this.rightChopstick == null) {
+            throw new IllegalStateException("Cannot eat without chopsticks.");
+        }
+        this.eat();
         this.hasThought = true;
     }
 
@@ -45,5 +48,6 @@ public class Philosopher {
         this.rightChopstick.take();
         System.out.printf("[%s]: I am eating.", this.name);
         Thread.sleep(50);
+        this.hasEaten = true;
     }
 }
