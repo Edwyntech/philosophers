@@ -3,6 +3,7 @@ package tech.edwyn.philosophers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class DinnerTable {
     private final List<Chopstick> chopsticks = new ArrayList<>();
@@ -23,6 +24,17 @@ public class DinnerTable {
                 addChopstick();
             }
         }
+        distributeChopsticks();
+    }
+
+    private void distributeChopsticks() {
+        IntStream.range(0, this.guests.size()).forEach(this::distributeLeftAndRightChopsticks);
+    }
+
+    private void distributeLeftAndRightChopsticks(int index) {
+        int rightChopstickIndex = index + 1 > this.chopsticks.size() - 1 ? 0 : index + 1;
+        guests.get(index).assignLeftChopstick(this.chopsticks.get(index));
+        guests.get(index).assignRightChopstick(this.chopsticks.get(rightChopstickIndex));
     }
 
     public List<Philosopher> guests() {
