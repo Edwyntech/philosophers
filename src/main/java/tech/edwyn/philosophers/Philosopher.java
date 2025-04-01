@@ -5,6 +5,8 @@ public class Philosopher {
     private boolean hasEaten;
     private boolean hasThought;
     private DinnerTable dinnerTable;
+    private Chopstick leftChopstick;
+    private Chopstick rightChopstick;
 
     public Philosopher(String name) {
         this.name = name;
@@ -29,5 +31,21 @@ public class Philosopher {
 
     public void seatAt(DinnerTable dinnerTable) {
         this.dinnerTable = dinnerTable;
+    }
+
+    public Chopstick leftChopstick() {
+        return this.leftChopstick;
+    }
+
+    public void assignLeftChopstick(Chopstick chopstick) {
+        this.leftChopstick = chopstick;
+    }
+
+    public void assignRightChopstick(Chopstick chopstick) {
+        this.rightChopstick = chopstick;
+    }
+
+    public Chopstick rightChopstick() {
+        return this.rightChopstick;
     }
 }

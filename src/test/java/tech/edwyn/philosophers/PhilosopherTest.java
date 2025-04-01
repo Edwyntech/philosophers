@@ -34,4 +34,12 @@ class PhilosopherTest {
         philosopher.seatAt(dinnerTable);
         assertThat(philosopher.isSeatedAt()).isEqualTo(dinnerTable);
     }
+
+    @Test
+    void shouldHaveChopsticks() {
+        philosopher.assignLeftChopstick(new Chopstick());
+        philosopher.assignRightChopstick(new Chopstick());
+        assertThat(philosopher.leftChopstick()).isNotNull();
+        assertThat(philosopher.rightChopstick()).isNotNull();
+    }
 }
