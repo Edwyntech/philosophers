@@ -53,4 +53,24 @@ class PhilosopherTest {
         assertThat(philosopher.leftChopstick().isAvailable()).isFalse();
         assertThat(philosopher.rightChopstick().isAvailable()).isFalse();
     }
+
+    @Test
+    void shouldNotEatIfLeftChopstickIsNotAvailable() throws InterruptedException {
+        Chopstick chopstick = new Chopstick();
+        chopstick.take();
+        philosopher.assignLeftChopstick(chopstick);
+        philosopher.eat();
+        assertThat(philosopher.hasEaten()).isFalse();
+    }
+
+    @Test
+    void shouldNotEatIfRightChopstickIsNotAvailable() throws InterruptedException {
+        Chopstick leftChopstick = new Chopstick();
+        Chopstick rightChopstick = new Chopstick();
+        rightChopstick.take();
+        philosopher.assignLeftChopstick(leftChopstick);
+        philosopher.assignRightChopstick(rightChopstick);
+        philosopher.eat();
+        assertThat(philosopher.hasEaten()).isFalse();
+    }
 }

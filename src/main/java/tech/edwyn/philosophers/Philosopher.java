@@ -44,10 +44,12 @@ public class Philosopher {
     }
 
     public void eat() throws InterruptedException {
-        this.leftChopstick.take();
-        this.rightChopstick.take();
-        System.out.printf("[%s]: I am eating.", this.name);
-        Thread.sleep(50);
-        this.hasEaten = true;
+        if (leftChopstick.isAvailable() && rightChopstick.isAvailable()) {
+            this.leftChopstick.take();
+            this.rightChopstick.take();
+            System.out.printf("[%s]: I am eating.", this.name);
+            Thread.sleep(50);
+            this.hasEaten = true;
+        }
     }
 }
