@@ -49,6 +49,22 @@ class DinnerTableTest {
     }
 
     @Test
+    void shouldDistributeChopsticksWhenSeatingOnePhilosopher() {
+        dinnerTable.seat(platon);
+        assertThat(platon.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
+        assertThat(platon.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
+    }
+
+    @Test
+    void shouldDistributeChopsticksWhenSeatingTwoPhilosopher() {
+        dinnerTable.seat(platon, aristote);
+        assertThat(platon.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
+        assertThat(platon.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
+        assertThat(aristote.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
+        assertThat(aristote.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
+    }
+
+    @Test
     void shouldDistributeChopsticksWhenSeatingManyPhilosopher() {
         dinnerTable.seat(platon, aristote, hegel);
         assertThat(platon.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());

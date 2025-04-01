@@ -29,13 +29,6 @@ class PhilosopherTest {
     }
 
     @Test
-    void shouldSeatAtTable() {
-        DinnerTable dinnerTable = new DinnerTable();
-        philosopher.seatAt(dinnerTable);
-        assertThat(philosopher.isSeatedAt()).isEqualTo(dinnerTable);
-    }
-
-    @Test
     void shouldHaveChopsticks() {
         philosopher.assignLeftChopstick(new Chopstick());
         philosopher.assignRightChopstick(new Chopstick());

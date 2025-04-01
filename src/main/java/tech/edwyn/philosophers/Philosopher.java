@@ -4,7 +4,6 @@ public class Philosopher {
     private final String name;
     private boolean hasEaten;
     private boolean hasThought;
-    private DinnerTable dinnerTable;
     private Chopstick leftChopstick;
     private Chopstick rightChopstick;
 
@@ -23,14 +22,6 @@ public class Philosopher {
 
     public boolean hasThought() {
         return this.hasThought;
-    }
-
-    public DinnerTable isSeatedAt() {
-        return this.dinnerTable;
-    }
-
-    public void seatAt(DinnerTable dinnerTable) {
-        this.dinnerTable = dinnerTable;
     }
 
     public Chopstick leftChopstick() {
