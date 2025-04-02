@@ -13,7 +13,7 @@ public class Philosopher {
 
     public void haveDinner() throws InterruptedException {
         if (this.leftChopstick == null || this.rightChopstick == null) {
-            throw new IllegalStateException("Cannot eat without chopsticks.");
+            throw new IllegalStateException("Cannot have dinner without chopsticks.");
         }
         this.eat();
         this.hasThought = true;

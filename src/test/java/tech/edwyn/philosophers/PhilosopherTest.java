@@ -25,7 +25,7 @@ class PhilosopherTest {
     @Test
     void shouldNotHaveDinnerWithoutChopsticks() {
         assertThatThrownBy(() -> philosopher.haveDinner()).isInstanceOf(IllegalStateException.class).hasMessage(
-                "Cannot eat without chopsticks.");
+                "Cannot have dinner without chopsticks.");
     }
 
     @Test
