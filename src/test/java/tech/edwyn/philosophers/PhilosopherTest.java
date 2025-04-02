@@ -32,7 +32,11 @@ class PhilosopherTest {
     void shouldHaveDinner() throws InterruptedException {
         philosopher.assignLeftChopstick(new Chopstick());
         philosopher.assignRightChopstick(new Chopstick());
+
+        // Act
         philosopher.haveDinner();
+
+        // Assert
         assertThat(philosopher.hasEaten()).isTrue();
         assertThat(philosopher.hasThought()).isTrue();
     }
@@ -49,7 +53,11 @@ class PhilosopherTest {
     void shouldTakeChopsticksWhenEating() throws InterruptedException {
         philosopher.assignLeftChopstick(new Chopstick());
         philosopher.assignRightChopstick(new Chopstick());
+
+        // Act
         philosopher.eat();
+
+        // Assert
         assertThat(philosopher.leftChopstick().isAvailable()).isFalse();
         assertThat(philosopher.rightChopstick().isAvailable()).isFalse();
     }
@@ -59,7 +67,11 @@ class PhilosopherTest {
         Chopstick chopstick = new Chopstick();
         chopstick.take();
         philosopher.assignLeftChopstick(chopstick);
+
+        // Act
         philosopher.eat();
+
+        // Assert
         assertThat(philosopher.hasEaten()).isFalse();
     }
 
@@ -70,7 +82,11 @@ class PhilosopherTest {
         rightChopstick.take();
         philosopher.assignLeftChopstick(leftChopstick);
         philosopher.assignRightChopstick(rightChopstick);
+
+        // Act
         philosopher.eat();
+
+        // Assert
         assertThat(philosopher.hasEaten()).isFalse();
     }
 }
