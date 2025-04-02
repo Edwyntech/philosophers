@@ -18,10 +18,16 @@ public class Philosopher {
         try {
             this.eat();
             this.putChopsticksDown();
+            think();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void think() throws InterruptedException {
         this.hasThought = true;
+        System.out.printf("[%s]: I am thinking.", this.name);
+        Thread.sleep(50);
     }
 
     private void putChopsticksDown() {

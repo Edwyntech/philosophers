@@ -51,5 +51,10 @@ class DinnerTest {
         assertThat(dinner.philosophers()).allMatch(Philosopher::hasEaten);
     }
 
-
+    @Test
+    void philosophersShouldThinkDuringDinner() {
+        dinner.add("Platon", "Aristote", "Hegel");
+        dinner.start();
+        assertThat(dinner.philosophers()).allMatch(Philosopher::hasThought);
+    }
 }
