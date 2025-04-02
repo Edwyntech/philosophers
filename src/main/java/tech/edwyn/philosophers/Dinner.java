@@ -22,5 +22,6 @@ public class Dinner {
 
     public void start() {
         this.dinnerTable.seat(this.philosophers.toArray(new Philosopher[0]));
+        this.philosophers.forEach(Philosopher::haveDinner);
     }
 }

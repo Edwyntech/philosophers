@@ -11,12 +11,22 @@ public class Philosopher {
         this.name = name;
     }
 
-    public void haveDinner() throws InterruptedException {
+    public void haveDinner() {
         if (this.leftChopstick == null || this.rightChopstick == null) {
             throw new IllegalStateException("Cannot have dinner without chopsticks.");
         }
-        this.eat();
+        try {
+            this.eat();
+            this.putChopsticksDown();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         this.hasThought = true;
+    }
+
+    private void putChopsticksDown() {
+        this.rightChopstick.putDown();
+        this.leftChopstick.putDown();
     }
 
     public boolean hasEaten() {

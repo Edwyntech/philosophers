@@ -43,4 +43,13 @@ class DinnerTest {
         assertThat(dinner.table().guests()).hasSize(3);
         assertThat(dinner.table().chopsticks()).hasSize(3);
     }
+
+    @Test
+    void philosophersShouldEatDuringDinner() {
+        dinner.add("Platon", "Aristote", "Hegel");
+        dinner.start();
+        assertThat(dinner.philosophers()).allMatch(Philosopher::hasEaten);
+    }
+
+
 }
