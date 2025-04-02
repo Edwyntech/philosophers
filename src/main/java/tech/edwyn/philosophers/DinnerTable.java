@@ -20,11 +20,15 @@ public class DinnerTable {
     public void seat(Philosopher... philosophers) {
         this.guests.addAll(Arrays.asList(philosophers));
         if (!this.guests.isEmpty()) {
-            while (this.chopsticks.size() < 2 || this.chopsticks.size() < this.guests.size()) {
+            while (needMoreChopsticks()) {
                 addChopstick();
             }
         }
         distributeChopsticks();
+    }
+
+    private boolean needMoreChopsticks() {
+        return this.chopsticks.size() < 2 || this.chopsticks.size() < this.guests.size();
     }
 
     private void distributeChopsticks() {
