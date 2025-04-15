@@ -11,7 +11,7 @@ class PhilosopherTest {
 
     @BeforeEach
     void initializeTest() {
-        philosopher = new Philosopher("Platon");
+        philosopher = new Philosopher("Platon", new DinnerTable());
     }
 
     @Test
@@ -23,11 +23,22 @@ class PhilosopherTest {
     @Test
     void shouldNotHaveDinnerWithoutChopsticks() {
         assertThatThrownBy(() -> philosopher.haveDinner()).isInstanceOf(IllegalStateException.class).hasMessage(
-                "Cannot have dinner without chopsticks.");
+                "Cannot have dinner without table.");
     }
 
     @Test
-    void shouldHaveDinner() throws InterruptedException {
+    void shouldKnowTheTable() {
+        DinnerTable dinnerTable = new DinnerTable();
+
+        // Act
+        Philosopher platon = new Philosopher("Platon", dinnerTable);
+
+        // Assert
+        assertThat(platon.dinnerTable()).isNotNull();
+    }
+
+    @Test
+    void shouldHaveDinner() {
         philosopher.assignLeftChopstick(new Chopstick());
         philosopher.assignRightChopstick(new Chopstick());
 
@@ -86,16 +97,5 @@ class PhilosopherTest {
 
         // Assert
         assertThat(philosopher.hasEaten()).isFalse();
-    }
-
-    @Test
-    void shouldKnowTheTable() {
-        DinnerTable dinnerTable = new DinnerTable();
-
-        // Act
-        Philosopher platon = new Philosopher("Platon", dinnerTable);
-
-        // Assert
-        assertThat(platon.dinnerTable()).isNotNull();
     }
 }

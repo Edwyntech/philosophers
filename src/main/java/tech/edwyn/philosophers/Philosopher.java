@@ -18,8 +18,8 @@ public class Philosopher {
     }
 
     public void haveDinner() {
-        if (this.leftChopstick == null || this.rightChopstick == null) {
-            throw new IllegalStateException("Cannot have dinner without chopsticks.");
+        if (this.dinnerTable == null) {
+            throw new IllegalStateException("Cannot have dinner without table.");
         }
         try {
             this.eat();
