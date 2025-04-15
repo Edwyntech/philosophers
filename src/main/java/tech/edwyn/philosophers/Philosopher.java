@@ -61,13 +61,18 @@ public class Philosopher {
     }
 
     public void eat() throws InterruptedException {
-        if (leftChopstick.isAvailable() && rightChopstick.isAvailable()) {
-            this.leftChopstick.take();
-            this.rightChopstick.take();
+        if (chopsticksAreAvailable()) {
+            this.dinnerTable.leftChopstick(this).take();
+            this.dinnerTable.rightChopstick(this).take();
             System.out.printf("[%s]: I am eating.", this.name);
             Thread.sleep(50);
             this.hasEaten = true;
         }
+    }
+
+    private boolean chopsticksAreAvailable() {
+        return this.dinnerTable.leftChopstick(this).isAvailable() && this.dinnerTable.rightChopstick(
+                this).isAvailable();
     }
 
     public DinnerTable dinnerTable() {

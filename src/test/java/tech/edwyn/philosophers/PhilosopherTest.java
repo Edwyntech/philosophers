@@ -47,9 +47,8 @@ class PhilosopherTest {
 
     @Test
     void shouldHaveDinner() {
-        philosopher.assignLeftChopstick(new Chopstick());
-        philosopher.assignRightChopstick(new Chopstick());
-        philosopher.seatAt(new DinnerTable());
+        DinnerTable dinnerTable = new DinnerTable();
+        dinnerTable.seat(philosopher);
 
         // Act
         philosopher.haveDinner();
@@ -61,22 +60,23 @@ class PhilosopherTest {
 
     @Test
     void shouldTakeChopsticksWhenEating() throws InterruptedException {
-        philosopher.assignLeftChopstick(new Chopstick());
-        philosopher.assignRightChopstick(new Chopstick());
+        DinnerTable dinnerTable = new DinnerTable();
+        dinnerTable.seat(philosopher);
 
         // Act
         philosopher.eat();
 
         // Assert
-        assertThat(philosopher.leftChopstick().isAvailable()).isFalse();
-        assertThat(philosopher.rightChopstick().isAvailable()).isFalse();
+        assertThat(dinnerTable.leftChopstick(philosopher).isAvailable()).isFalse();
+        assertThat(dinnerTable.rightChopstick(philosopher).isAvailable()).isFalse();
     }
 
     @Test
     void shouldNotEatIfLeftChopstickIsNotAvailable() throws InterruptedException {
-        Chopstick chopstick = new Chopstick();
-        chopstick.take();
-        philosopher.assignLeftChopstick(chopstick);
+        DinnerTable dinnerTable = new DinnerTable();
+        dinnerTable.seat(philosopher);
+        Chopstick leftChopstick = dinnerTable.leftChopstick(philosopher);
+        leftChopstick.take();
 
         // Act
         philosopher.eat();
@@ -87,11 +87,10 @@ class PhilosopherTest {
 
     @Test
     void shouldNotEatIfRightChopstickIsNotAvailable() throws InterruptedException {
-        Chopstick leftChopstick = new Chopstick();
-        Chopstick rightChopstick = new Chopstick();
+        DinnerTable dinnerTable = new DinnerTable();
+        dinnerTable.seat(philosopher);
+        Chopstick rightChopstick = dinnerTable.rightChopstick(philosopher);
         rightChopstick.take();
-        philosopher.assignLeftChopstick(leftChopstick);
-        philosopher.assignRightChopstick(rightChopstick);
 
         // Act
         philosopher.eat();
