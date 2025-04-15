@@ -11,7 +11,7 @@ class PhilosopherTest {
 
     @BeforeEach
     void initializeTest() {
-        philosopher = new Philosopher("Platon", new DinnerTable());
+        philosopher = new Philosopher("Platon");
     }
 
     @Test
@@ -27,27 +27,14 @@ class PhilosopherTest {
     }
 
     @Test
-    void shouldKnowTheTable() {
+    void shouldSeatAtTable() {
         DinnerTable dinnerTable = new DinnerTable();
 
         // Act
-        Philosopher platon = new Philosopher("Platon", dinnerTable);
+        philosopher.seatAt(dinnerTable);
 
         // Assert
-        assertThat(platon.dinnerTable()).isNotNull();
-    }
-
-    @Test
-    void shouldHaveDinner() {
-        philosopher.assignLeftChopstick(new Chopstick());
-        philosopher.assignRightChopstick(new Chopstick());
-
-        // Act
-        philosopher.haveDinner();
-
-        // Assert
-        assertThat(philosopher.hasEaten()).isTrue();
-        assertThat(philosopher.hasThought()).isTrue();
+        assertThat(philosopher.dinnerTable()).isNotNull();
     }
 
     @Test
@@ -56,6 +43,20 @@ class PhilosopherTest {
         philosopher.assignRightChopstick(new Chopstick());
         assertThat(philosopher.leftChopstick()).isNotNull();
         assertThat(philosopher.rightChopstick()).isNotNull();
+    }
+
+    @Test
+    void shouldHaveDinner() {
+        philosopher.assignLeftChopstick(new Chopstick());
+        philosopher.assignRightChopstick(new Chopstick());
+        philosopher.seatAt(new DinnerTable());
+
+        // Act
+        philosopher.haveDinner();
+
+        // Assert
+        assertThat(philosopher.hasEaten()).isTrue();
+        assertThat(philosopher.hasThought()).isTrue();
     }
 
     @Test

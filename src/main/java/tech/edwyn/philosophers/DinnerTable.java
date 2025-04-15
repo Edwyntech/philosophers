@@ -25,6 +25,7 @@ public class DinnerTable {
             }
         }
         distributeChopsticks();
+        this.guests.forEach(philosopher -> philosopher.seatAt(this));
     }
 
     private boolean needMoreChopsticks() {

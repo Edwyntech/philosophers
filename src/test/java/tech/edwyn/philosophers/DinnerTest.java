@@ -37,6 +37,14 @@ class DinnerTest {
     }
 
     @Test
+    void shouldSeatGuestsWhenStarts() {
+        dinner.add("Platon", "Aristote", "Hegel");
+
+        dinner.start();
+        assertThat(dinner.philosophers()).allMatch(philosopher -> philosopher.dinnerTable() == dinner.table());
+    }
+
+    @Test
     void shouldHaveGuestsAndChopsticksWhenStarts() {
         dinner.add("Platon", "Aristote", "Hegel");
         dinner.start();

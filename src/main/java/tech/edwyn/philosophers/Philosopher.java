@@ -12,11 +12,6 @@ public class Philosopher {
         this.name = name;
     }
 
-    public Philosopher(String name, DinnerTable dinnerTable) {
-        this.name = name;
-        this.dinnerTable = dinnerTable;
-    }
-
     public void haveDinner() {
         if (this.dinnerTable == null) {
             throw new IllegalStateException("Cannot have dinner without table.");
@@ -77,5 +72,9 @@ public class Philosopher {
 
     public DinnerTable dinnerTable() {
         return dinnerTable;
+    }
+
+    public void seatAt(DinnerTable dinnerTable) {
+        this.dinnerTable = dinnerTable;
     }
 }
