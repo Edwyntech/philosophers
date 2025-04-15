@@ -44,4 +44,22 @@ public class DinnerTable {
     public List<Philosopher> guests() {
         return this.guests;
     }
+
+    public Chopstick leftChopstick(Philosopher philosopher) {
+        int index = this.guests.indexOf(philosopher);
+        if (index < 0) {
+            throw new IllegalStateException("Guest is not seated and cannot get left chopstick.");
+        }
+        return this.chopsticks.get(index);
+    }
+
+    public Chopstick rightChopstick(Philosopher philosopher) {
+        int guestIndex = this.guests.indexOf(philosopher);
+        if (guestIndex < 0) {
+            throw new IllegalStateException("Guest is not seated and cannot get right chopstick.");
+        }
+        int chopstickIndex = guestIndex + 1;
+        return chopstickIndex == this.chopsticks.size() ? this.chopsticks.getFirst() : this.chopsticks.get(
+                chopstickIndex);
+    }
 }
