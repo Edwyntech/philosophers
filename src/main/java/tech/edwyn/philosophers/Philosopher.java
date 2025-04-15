@@ -6,9 +6,15 @@ public class Philosopher {
     private boolean hasThought;
     private Chopstick leftChopstick;
     private Chopstick rightChopstick;
+    private DinnerTable dinnerTable;
 
     public Philosopher(String name) {
         this.name = name;
+    }
+
+    public Philosopher(String name, DinnerTable dinnerTable) {
+        this.name = name;
+        this.dinnerTable = dinnerTable;
     }
 
     public void haveDinner() {
@@ -67,5 +73,9 @@ public class Philosopher {
             Thread.sleep(50);
             this.hasEaten = true;
         }
+    }
+
+    public DinnerTable dinnerTable() {
+        return dinnerTable;
     }
 }

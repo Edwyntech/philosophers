@@ -1,12 +1,10 @@
 package tech.edwyn.philosophers;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PhilosopherTest {
     private Philosopher philosopher;
@@ -88,5 +86,16 @@ class PhilosopherTest {
 
         // Assert
         assertThat(philosopher.hasEaten()).isFalse();
+    }
+
+    @Test
+    void shouldKnowTheTable() {
+        DinnerTable dinnerTable = new DinnerTable();
+
+        // Act
+        Philosopher platon = new Philosopher("Platon", dinnerTable);
+
+        // Assert
+        assertThat(platon.dinnerTable()).isNotNull();
     }
 }
