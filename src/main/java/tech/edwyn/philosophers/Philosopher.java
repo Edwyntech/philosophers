@@ -32,8 +32,8 @@ public class Philosopher {
     }
 
     private void putChopsticksDown() {
-        this.rightChopstick.putDown();
-        this.leftChopstick.putDown();
+        this.dinnerTable.putDownLeftChopstick(this);
+        this.dinnerTable.putDownRightChopstick(this);
     }
 
     public boolean hasEaten() {
@@ -62,8 +62,8 @@ public class Philosopher {
 
     public void eat() throws InterruptedException {
         if (chopsticksAreAvailable()) {
-            this.dinnerTable.leftChopstick(this).take();
-            this.dinnerTable.rightChopstick(this).take();
+            this.dinnerTable.takeLeftChopstick(this);
+            this.dinnerTable.takeRightChopstick(this);
             System.out.printf("[%s]: I am eating.", this.name);
             Thread.sleep(50);
             this.hasEaten = true;

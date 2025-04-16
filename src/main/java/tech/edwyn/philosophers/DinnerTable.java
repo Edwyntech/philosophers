@@ -63,4 +63,20 @@ public class DinnerTable {
         return chopstickIndex == this.chopsticks.size() ? this.chopsticks.getFirst() : this.chopsticks.get(
                 chopstickIndex);
     }
+
+    public void takeLeftChopstick(Philosopher philosopher) {
+        this.leftChopstick(philosopher).take();
+    }
+
+    public void takeRightChopstick(Philosopher philosopher) {
+        this.rightChopstick(philosopher).take();
+    }
+
+    public void putDownRightChopstick(Philosopher philosopher) {
+        this.rightChopstick(philosopher).putDown();
+    }
+
+    public void putDownLeftChopstick(Philosopher philosopher) {
+        this.leftChopstick(philosopher).putDown();
+    }
 }

@@ -8,10 +8,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PhilosopherTest {
     private Philosopher philosopher;
+    DinnerTable dinnerTable;
 
     @BeforeEach
     void initializeTest() {
         philosopher = new Philosopher("Platon");
+        dinnerTable = new DinnerTable();
     }
 
     @Test
@@ -28,8 +30,6 @@ class PhilosopherTest {
 
     @Test
     void shouldSeatAtTable() {
-        DinnerTable dinnerTable = new DinnerTable();
-
         // Act
         philosopher.seatAt(dinnerTable);
 
@@ -47,7 +47,6 @@ class PhilosopherTest {
 
     @Test
     void shouldHaveDinner() {
-        DinnerTable dinnerTable = new DinnerTable();
         dinnerTable.seat(philosopher);
 
         // Act
@@ -60,7 +59,6 @@ class PhilosopherTest {
 
     @Test
     void shouldTakeChopsticksWhenEating() throws InterruptedException {
-        DinnerTable dinnerTable = new DinnerTable();
         dinnerTable.seat(philosopher);
 
         // Act
@@ -73,10 +71,8 @@ class PhilosopherTest {
 
     @Test
     void shouldNotEatIfLeftChopstickIsNotAvailable() throws InterruptedException {
-        DinnerTable dinnerTable = new DinnerTable();
         dinnerTable.seat(philosopher);
-        Chopstick leftChopstick = dinnerTable.leftChopstick(philosopher);
-        leftChopstick.take();
+        dinnerTable.takeLeftChopstick(philosopher);
 
         // Act
         philosopher.eat();
@@ -87,15 +83,22 @@ class PhilosopherTest {
 
     @Test
     void shouldNotEatIfRightChopstickIsNotAvailable() throws InterruptedException {
-        DinnerTable dinnerTable = new DinnerTable();
         dinnerTable.seat(philosopher);
-        Chopstick rightChopstick = dinnerTable.rightChopstick(philosopher);
-        rightChopstick.take();
+        dinnerTable.takeRightChopstick(philosopher);
 
         // Act
         philosopher.eat();
 
         // Assert
         assertThat(philosopher.hasEaten()).isFalse();
+    }
+
+    @Test
+    void shouldPutChopstickBackDownAfterDinner() throws InterruptedException {
+        dinnerTable.seat(philosopher);
+
+        philosopher.haveDinner();
+
+        assertThat(dinnerTable.chopsticks()).allMatch(Chopstick::isAvailable);
     }
 }
