@@ -1,17 +1,22 @@
 package tech.edwyn.philosophers;
 
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+
 import static org.assertj.core.api.Assertions.*;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 
 class DinnerTest {
 
     private Dinner dinner;
 
     @BeforeEach
-    public void extracted() {
-        dinner = new Dinner();
+    public void setUp() {
+        dinner = new Dinner(Duration.ofMillis(200));
     }
 
     @Test
@@ -64,5 +69,29 @@ class DinnerTest {
         dinner.add("Platon", "Aristote", "Hegel");
         dinner.start();
         assertThat(dinner.philosophers()).allMatch(Philosopher::hasThought);
+    }
+
+    @Test
+    void shouldEnd() throws InterruptedException {
+        dinner.start();
+        await()
+                .atMost(Duration.ofMillis(300))
+                .untilAsserted(() -> assertThat(dinner.isOver()).isTrue());
+    }
+
+    @Test
+    void shouldHaveADuration() {
+        assertThat(dinner.duration()).isNotNull();
+    }
+
+    @Test
+    void shouldNotBeOverIfDurationIsNotElapsed() {
+        Dinner dinner = new Dinner(Duration.ofMillis(600));
+        dinner.start();
+        await()
+                .during(Duration.ofMillis(400))
+                .pollInterval(Duration.ofMillis(50))
+                .atMost(Duration.ofMillis(600))
+                .untilAsserted(() -> assertThat(dinner.isOver()).isFalse());
     }
 }

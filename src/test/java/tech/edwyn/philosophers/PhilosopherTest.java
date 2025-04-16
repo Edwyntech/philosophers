@@ -3,6 +3,9 @@ package tech.edwyn.philosophers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,7 +27,7 @@ class PhilosopherTest {
 
     @Test
     void shouldNotHaveDinnerWithoutChopsticks() {
-        assertThatThrownBy(() -> philosopher.haveDinner()).isInstanceOf(IllegalStateException.class).hasMessage(
+        assertThatThrownBy(() -> philosopher.haveDinner(LocalDateTime.now())).isInstanceOf(IllegalStateException.class).hasMessage(
                 "Cannot have dinner without table.");
     }
 
@@ -42,7 +45,7 @@ class PhilosopherTest {
         dinnerTable.seat(philosopher);
 
         // Act
-        philosopher.haveDinner();
+        philosopher.haveDinner(LocalDateTime.now().plus(Duration.ofMillis(100)));
 
         // Assert
         assertThat(philosopher.hasEaten()).isTrue();
@@ -86,10 +89,10 @@ class PhilosopherTest {
     }
 
     @Test
-    void shouldPutChopstickBackDownAfterDinner() throws InterruptedException {
+    void shouldPutChopstickBackDownAfterDinner() {
         dinnerTable.seat(philosopher);
 
-        philosopher.haveDinner();
+        philosopher.haveDinner(LocalDateTime.now());
 
         assertThat(dinnerTable.chopsticks()).allMatch(Chopstick::isAvailable);
     }

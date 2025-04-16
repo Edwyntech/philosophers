@@ -1,5 +1,7 @@
 package tech.edwyn.philosophers;
 
+import java.time.LocalDateTime;
+
 public class Philosopher {
     private final String name;
     private boolean hasEaten;
@@ -10,7 +12,7 @@ public class Philosopher {
         this.name = name;
     }
 
-    public void haveDinner() {
+    public void haveDinner(LocalDateTime dinnerEndDateTime) {
         if (this.dinnerTable == null) {
             throw new IllegalStateException("Cannot have dinner without table.");
         }
