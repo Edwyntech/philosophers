@@ -96,4 +96,11 @@ class PhilosopherTest {
 
         assertThat(dinnerTable.chopsticks()).allMatch(Chopstick::isAvailable);
     }
+
+    @Test
+    void shouldNotEatIfDinnerIsOver() {
+        dinnerTable.seat(philosopher);
+        philosopher.haveDinner(LocalDateTime.now());
+        assertThat(philosopher.hasEaten()).isFalse();
+    }
 }

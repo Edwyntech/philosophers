@@ -16,19 +16,20 @@ public class Philosopher {
         if (this.dinnerTable == null) {
             throw new IllegalStateException("Cannot have dinner without table.");
         }
-        try {
-            this.eat();
+        if (dinnerEndDateTime.isAfter(LocalDateTime.now())) {
+            try {
+                this.eat();
+                think();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             this.putChopsticksDown();
-            think();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 
-    private void think() throws InterruptedException {
+    public void think() throws InterruptedException {
         this.hasThought = true;
-        System.out.printf("[%s]: I am thinking.", this.name);
-        Thread.sleep(50);
+        System.out.printf("\n[%s]: I am thinking.%n", this.name);
     }
 
     private void putChopsticksDown() {
@@ -48,8 +49,7 @@ public class Philosopher {
         if (chopsticksAreAvailable()) {
             this.dinnerTable.takeLeftChopstick(this);
             this.dinnerTable.takeRightChopstick(this);
-            System.out.printf("[%s]: I am eating.", this.name);
-            Thread.sleep(50);
+            System.out.printf("\n[%s]: I am eating.", this.name);
             this.hasEaten = true;
         }
     }
