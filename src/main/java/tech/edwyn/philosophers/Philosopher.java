@@ -4,8 +4,6 @@ public class Philosopher {
     private final String name;
     private boolean hasEaten;
     private boolean hasThought;
-    private Chopstick leftChopstick;
-    private Chopstick rightChopstick;
     private DinnerTable dinnerTable;
 
     public Philosopher(String name) {
@@ -42,22 +40,6 @@ public class Philosopher {
 
     public boolean hasThought() {
         return this.hasThought;
-    }
-
-    public Chopstick leftChopstick() {
-        return this.leftChopstick;
-    }
-
-    public void assignLeftChopstick(Chopstick chopstick) {
-        this.leftChopstick = chopstick;
-    }
-
-    public void assignRightChopstick(Chopstick chopstick) {
-        this.rightChopstick = chopstick;
-    }
-
-    public Chopstick rightChopstick() {
-        return this.rightChopstick;
     }
 
     public void eat() throws InterruptedException {

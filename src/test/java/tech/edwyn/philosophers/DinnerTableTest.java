@@ -81,40 +81,4 @@ class DinnerTableTest {
         assertThatException().isThrownBy(() -> dinnerTable.rightChopstick(platon)).isInstanceOf(
                 IllegalStateException.class).withMessage("Guest is not seated and cannot get right chopstick.");
     }
-
-    @Test
-    void shouldDistributeChopsticksWhenSeatingOnePhilosopher() {
-        // Act
-        dinnerTable.seat(platon);
-
-        // Assert
-        assertThat(platon.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
-        assertThat(platon.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
-    }
-
-    @Test
-    void shouldDistributeChopsticksWhenSeatingTwoPhilosopher() {
-        // Act
-        dinnerTable.seat(platon, aristote);
-
-        // Assert
-        assertThat(platon.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
-        assertThat(platon.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
-        assertThat(aristote.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
-        assertThat(aristote.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
-    }
-
-    @Test
-    void shouldDistributeChopsticksWhenSeatingManyPhilosopher() {
-        // Act
-        dinnerTable.seat(platon, aristote, hegel);
-
-        // Assert
-        assertThat(platon.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
-        assertThat(platon.rightChopstick()).isEqualTo(dinnerTable.chopsticks().get(1));
-        assertThat(aristote.leftChopstick()).isEqualTo(dinnerTable.chopsticks().get(1));
-        assertThat(aristote.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
-        assertThat(hegel.leftChopstick()).isEqualTo(dinnerTable.chopsticks().getLast());
-        assertThat(hegel.rightChopstick()).isEqualTo(dinnerTable.chopsticks().getFirst());
-    }
 }

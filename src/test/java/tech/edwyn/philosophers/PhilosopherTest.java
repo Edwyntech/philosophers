@@ -38,14 +38,6 @@ class PhilosopherTest {
     }
 
     @Test
-    void shouldHaveChopsticks() {
-        philosopher.assignLeftChopstick(new Chopstick());
-        philosopher.assignRightChopstick(new Chopstick());
-        assertThat(philosopher.leftChopstick()).isNotNull();
-        assertThat(philosopher.rightChopstick()).isNotNull();
-    }
-
-    @Test
     void shouldHaveDinner() {
         dinnerTable.seat(philosopher);
 

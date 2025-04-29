@@ -24,22 +24,11 @@ public class DinnerTable {
                 addChopstick();
             }
         }
-        distributeChopsticks();
         this.guests.forEach(philosopher -> philosopher.seatAt(this));
     }
 
     private boolean needMoreChopsticks() {
         return this.chopsticks.size() < 2 || this.chopsticks.size() < this.guests.size();
-    }
-
-    private void distributeChopsticks() {
-        IntStream.range(0, this.guests.size()).forEach(this::distributeLeftAndRightChopsticks);
-    }
-
-    private void distributeLeftAndRightChopsticks(int index) {
-        int rightChopstickIndex = index + 1 > this.chopsticks.size() - 1 ? 0 : index + 1;
-        guests.get(index).assignLeftChopstick(this.chopsticks.get(index));
-        guests.get(index).assignRightChopstick(this.chopsticks.get(rightChopstickIndex));
     }
 
     public List<Philosopher> guests() {
