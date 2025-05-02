@@ -21,7 +21,8 @@ public class Dinner {
     }
 
     public void add(String... philosopherNames) {
-        Stream.of(philosopherNames).map(Philosopher::new).forEach(this.philosophers::add);
+        Stream.of(philosopherNames).map(philosopherName -> new Philosopher(philosopherName, Duration.ofMillis(50)))
+                .forEach(this.philosophers::add);
     }
 
     public DinnerTable table() {

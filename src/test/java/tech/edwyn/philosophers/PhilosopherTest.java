@@ -15,7 +15,7 @@ class PhilosopherTest {
 
     @BeforeEach
     void initializeTest() {
-        philosopher = new Philosopher("Platon");
+        philosopher = new Philosopher("Platon", Duration.ofMillis(50));
         dinnerTable = new DinnerTable();
     }
 
@@ -27,8 +27,9 @@ class PhilosopherTest {
 
     @Test
     void shouldNotHaveDinnerWithoutChopsticks() {
-        assertThatThrownBy(() -> philosopher.haveDinner(LocalDateTime.now())).isInstanceOf(IllegalStateException.class).hasMessage(
-                "Cannot have dinner without table.");
+        assertThatThrownBy(() -> philosopher.haveDinner(LocalDateTime.now())).isInstanceOf(IllegalStateException.class)
+                .hasMessage(
+                        "Cannot have dinner without table.");
     }
 
     @Test
@@ -100,7 +101,38 @@ class PhilosopherTest {
     @Test
     void shouldNotEatIfDinnerIsOver() {
         dinnerTable.seat(philosopher);
+
+        // Act
         philosopher.haveDinner(LocalDateTime.now());
+
+        // Assert
         assertThat(philosopher.hasEaten()).isFalse();
+    }
+
+    @Test
+    void shouldHaveZeroEatenDurationIfNotEaten() {
+        assertThat(philosopher.totalDurationEating()).isEqualTo(Duration.ZERO);
+    }
+
+    @Test
+    void shouldHaveNonZeroEatenAmountIfHasEaten() {
+        dinnerTable.seat(philosopher);
+
+        // Act
+        philosopher.haveDinner(LocalDateTime.now().plus(Duration.ofMillis(50)));
+
+        // Assert
+        assertThat(philosopher.totalDurationEating()).isGreaterThan(Duration.ZERO);
+    }
+
+    @Test
+    void timeHavingDinnerShouldActuallyPass() {
+        dinnerTable.seat(philosopher);
+        LocalDateTime dinnerStartDatetime = LocalDateTime.now();
+
+        philosopher.haveDinner(LocalDateTime.now().plus(Duration.ofMillis(1)));
+
+        Duration timeHavingDinner = Duration.between(dinnerStartDatetime, LocalDateTime.now());
+        assertThat(philosopher.totalDurationEating()).isLessThanOrEqualTo(timeHavingDinner);
     }
 }

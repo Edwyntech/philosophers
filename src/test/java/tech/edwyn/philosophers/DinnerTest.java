@@ -1,14 +1,12 @@
 package tech.edwyn.philosophers;
 
-import org.awaitility.Awaitility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Awaitility.with;
 
 class DinnerTest {
 
@@ -72,7 +70,7 @@ class DinnerTest {
     }
 
     @Test
-    void shouldEnd() throws InterruptedException {
+    void shouldEnd() {
         dinner.start();
         await()
                 .atMost(Duration.ofMillis(300))

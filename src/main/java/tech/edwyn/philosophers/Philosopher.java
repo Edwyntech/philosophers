@@ -1,15 +1,23 @@
 package tech.edwyn.philosophers;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Philosopher {
     private final String name;
-    private boolean hasEaten;
+    private final Duration eatDuration;
     private boolean hasThought;
     private DinnerTable dinnerTable;
+    private Duration totalDurationEating = Duration.ZERO;
 
     public Philosopher(String name) {
         this.name = name;
+        this.eatDuration = Duration.ZERO;
+    }
+
+    public Philosopher(String name, Duration eatDuration) {
+        this.name = name;
+        this.eatDuration = eatDuration;
     }
 
     public void haveDinner(LocalDateTime dinnerEndDateTime) {
@@ -38,7 +46,7 @@ public class Philosopher {
     }
 
     public boolean hasEaten() {
-        return this.hasEaten;
+        return totalDurationEating.isPositive();
     }
 
     public boolean hasThought() {
@@ -50,7 +58,8 @@ public class Philosopher {
             this.dinnerTable.takeLeftChopstick(this);
             this.dinnerTable.takeRightChopstick(this);
             System.out.printf("\n[%s]: I am eating.", this.name);
-            this.hasEaten = true;
+            Thread.sleep(eatDuration);
+            totalDurationEating = totalDurationEating.plus(eatDuration);
         }
     }
 
@@ -65,5 +74,9 @@ public class Philosopher {
 
     public void seatAt(DinnerTable dinnerTable) {
         this.dinnerTable = dinnerTable;
+    }
+
+    public Duration totalDurationEating() {
+        return totalDurationEating;
     }
 }
